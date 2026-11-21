@@ -1,0 +1,9 @@
+# Local credentials (never commit real passwords)
+config/config.local.php
+.env
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
