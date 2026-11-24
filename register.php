@@ -1,3 +1,4 @@
+
 <?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -93,6 +94,10 @@ $flashError = $_SESSION['error_msg'] ?? null;
 $flashSuccess = $_SESSION['success_msg'] ?? null;
 unset($_SESSION['error_msg'], $_SESSION['success_msg']);
 ?>
+=======
+?>
+
+>>>>>>> 2a9d9d087a6bc6fa418ee64128e7f86358dc5c48
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -115,6 +120,7 @@ unset($_SESSION['error_msg'], $_SESSION['success_msg']);
         <h2>Create an Account</h2>
         <p class="auth-subtitle">Fill in your information to get started.</p>
 
+<<<<<<< HEAD
         <?php if (!empty($flashError)): ?>
             <div class="alert error">
                 <?php echo htmlspecialchars($flashError, ENT_QUOTES, 'UTF-8'); ?>
@@ -127,11 +133,14 @@ unset($_SESSION['error_msg'], $_SESSION['success_msg']);
             </div>
         <?php endif; ?>
 
+=======
+>>>>>>> 2a9d9d087a6bc6fa418ee64128e7f86358dc5c48
         <form action="" method="POST" id="registerForm">
             <div class="form-group">
                 <label>Full Name</label>
                 <div class="input-wrapper">
                     <i class="fas fa-user"></i>
+<<<<<<< HEAD
                     <input
                         type="text"
                         name="full_name"
@@ -139,6 +148,9 @@ unset($_SESSION['error_msg'], $_SESSION['success_msg']);
                         value="<?php echo htmlspecialchars($fullName, ENT_QUOTES, 'UTF-8'); ?>"
                         required
                     >
+=======
+                    <input type="text" name="full_name" placeholder="Enter your full name" required>
+>>>>>>> 2a9d9d087a6bc6fa418ee64128e7f86358dc5c48
                 </div>
             </div>
 
@@ -146,6 +158,7 @@ unset($_SESSION['error_msg'], $_SESSION['success_msg']);
                 <label>Username</label>
                 <div class="input-wrapper">
                     <i class="fas fa-at"></i>
+<<<<<<< HEAD
                     <input
                         type="text"
                         name="username"
@@ -153,6 +166,9 @@ unset($_SESSION['error_msg'], $_SESSION['success_msg']);
                         value="<?php echo htmlspecialchars($username, ENT_QUOTES, 'UTF-8'); ?>"
                         required
                     >
+=======
+                    <input type="text" name="username" placeholder="Choose a username" required>
+>>>>>>> 2a9d9d087a6bc6fa418ee64128e7f86358dc5c48
                 </div>
             </div>
 
@@ -160,6 +176,7 @@ unset($_SESSION['error_msg'], $_SESSION['success_msg']);
                 <label>Email Address</label>
                 <div class="input-wrapper">
                     <i class="fas fa-envelope"></i>
+<<<<<<< HEAD
                     <input
                         type="email"
                         name="email"
@@ -167,6 +184,9 @@ unset($_SESSION['error_msg'], $_SESSION['success_msg']);
                         value="<?php echo htmlspecialchars($email, ENT_QUOTES, 'UTF-8'); ?>"
                         required
                     >
+=======
+                    <input type="email" name="email" placeholder="Enter your email" required>
+>>>>>>> 2a9d9d087a6bc6fa418ee64128e7f86358dc5c48
                 </div>
             </div>
 
@@ -199,4 +219,8 @@ unset($_SESSION['error_msg'], $_SESSION['success_msg']);
 
 <script src="assets/js/main.js"></script>
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> 2a9d9d087a6bc6fa418ee64128e7f86358dc5c48
