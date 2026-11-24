@@ -91,7 +91,7 @@ Session keys:
 2. Clone the repo:
 
 ```
-git clone https://github.com/OWNER/bookshop-inventory.git
+git clone https://github.com/shiilouu/bookshop-inventory.git
 cd bookshop-inventory
 ```
 
