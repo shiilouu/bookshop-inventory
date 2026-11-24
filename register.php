@@ -219,8 +219,3 @@ unset($_SESSION['error_msg'], $_SESSION['success_msg']);
 
 <script src="assets/js/main.js"></script>
 </body>
-<<<<<<< HEAD
-</html>
-=======
-</html>
->>>>>>> 2a9d9d087a6bc6fa418ee64128e7f86358dc5c48
