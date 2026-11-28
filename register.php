@@ -31,7 +31,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $validationErrors[] = 'Username must be 3–50 characters (letters, numbers, or underscores only).';
     }
 
-    if ($email !== '' && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    if ($email === '') {
+        $validationErrors[] = 'Email address is required.';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $validationErrors[] = 'Please enter a valid email address.';
     }
 
@@ -65,17 +67,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $passwordHash = password_hash($rawPassword, PASSWORD_DEFAULT);
 
         $insertStmt = $conn->prepare(
-            'INSERT INTO users (full_name, username, password_hash, role) VALUES (?, ?, ?, ?)'
+            'INSERT INTO users (full_name, username, email, password_hash, role) VALUES (?, ?, ?, ?, ?)'
         );
 
         if ($insertStmt) {
-            $insertStmt->bind_param('ssss', $fullName, $username, $passwordHash, $defaultRole);
+            $insertStmt->bind_param('sssss', $fullName, $username, $email, $passwordHash, $defaultRole);
 
-            if ($insertStmt->execute()) {
-                $insertStmt->close();
-                $_SESSION['success_msg'] = 'Account created successfully! Please sign in.';
-                header('Location: login.php');
-                exit();
+            try {
+                if ($insertStmt->execute()) {
+                    $insertStmt->close();
+                    $_SESSION['success_msg'] = 'Account created successfully! Please sign in.';
+                    header('Location: login.php');
+                    exit();
+                }
+            } catch (mysqli_sql_exception $e) {
+                error_log('Registration failed: ' . $e->getMessage());
             }
 
             $validationErrors[] = 'Could not register account. Please try again.';
@@ -94,10 +100,7 @@ $flashError = $_SESSION['error_msg'] ?? null;
 $flashSuccess = $_SESSION['success_msg'] ?? null;
 unset($_SESSION['error_msg'], $_SESSION['success_msg']);
 ?>
-=======
-?>
 
->>>>>>> 2a9d9d087a6bc6fa418ee64128e7f86358dc5c48
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -120,7 +123,6 @@ unset($_SESSION['error_msg'], $_SESSION['success_msg']);
         <h2>Create an Account</h2>
         <p class="auth-subtitle">Fill in your information to get started.</p>
 
-<<<<<<< HEAD
         <?php if (!empty($flashError)): ?>
             <div class="alert error">
                 <?php echo htmlspecialchars($flashError, ENT_QUOTES, 'UTF-8'); ?>
@@ -133,14 +135,11 @@ unset($_SESSION['error_msg'], $_SESSION['success_msg']);
             </div>
         <?php endif; ?>
 
-=======
->>>>>>> 2a9d9d087a6bc6fa418ee64128e7f86358dc5c48
         <form action="" method="POST" id="registerForm">
             <div class="form-group">
                 <label>Full Name</label>
                 <div class="input-wrapper">
                     <i class="fas fa-user"></i>
-<<<<<<< HEAD
                     <input
                         type="text"
                         name="full_name"
@@ -148,9 +147,6 @@ unset($_SESSION['error_msg'], $_SESSION['success_msg']);
                         value="<?php echo htmlspecialchars($fullName, ENT_QUOTES, 'UTF-8'); ?>"
                         required
                     >
-=======
-                    <input type="text" name="full_name" placeholder="Enter your full name" required>
->>>>>>> 2a9d9d087a6bc6fa418ee64128e7f86358dc5c48
                 </div>
             </div>
 
@@ -158,7 +154,6 @@ unset($_SESSION['error_msg'], $_SESSION['success_msg']);
                 <label>Username</label>
                 <div class="input-wrapper">
                     <i class="fas fa-at"></i>
-<<<<<<< HEAD
                     <input
                         type="text"
                         name="username"
@@ -166,9 +161,6 @@ unset($_SESSION['error_msg'], $_SESSION['success_msg']);
                         value="<?php echo htmlspecialchars($username, ENT_QUOTES, 'UTF-8'); ?>"
                         required
                     >
-=======
-                    <input type="text" name="username" placeholder="Choose a username" required>
->>>>>>> 2a9d9d087a6bc6fa418ee64128e7f86358dc5c48
                 </div>
             </div>
 
@@ -176,7 +168,6 @@ unset($_SESSION['error_msg'], $_SESSION['success_msg']);
                 <label>Email Address</label>
                 <div class="input-wrapper">
                     <i class="fas fa-envelope"></i>
-<<<<<<< HEAD
                     <input
                         type="email"
                         name="email"
@@ -184,9 +175,6 @@ unset($_SESSION['error_msg'], $_SESSION['success_msg']);
                         value="<?php echo htmlspecialchars($email, ENT_QUOTES, 'UTF-8'); ?>"
                         required
                     >
-=======
-                    <input type="email" name="email" placeholder="Enter your email" required>
->>>>>>> 2a9d9d087a6bc6fa418ee64128e7f86358dc5c48
                 </div>
             </div>
 
@@ -219,3 +207,4 @@ unset($_SESSION['error_msg'], $_SESSION['success_msg']);
 
 <script src="assets/js/main.js"></script>
 </body>
+</html>
